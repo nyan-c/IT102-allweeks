@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Card Object Example</title>
+</head>
+<body>
+  <h2>Card Object Example</h2>
+  <div id="output"></div>
+
+  <script>
+    // --- Card Constructor Function ---
+    function Card(suit, rank) {
+      this.suit = suit;             // Suit of the card (e.g., Hearts, Spades)
+      this.rank = rank;             // Rank of the card (e.g., Ace, King, 7)
+      this.isVisible = false;       // Visibility state (hidden by default)
+
+      // Method: Show card (make visible)
+      this.show = function() {
+        this.isVisible = true;
+      };
+
+      // Method: Hide card (make hidden)
+      this.hide = function() {
+        this.isVisible = false;
+      };
+    }
+
+    // --- Create Two Card Objects ---
+    let card1 = new Card("Hearts", "Queen");
+    let card2 = new Card("Spades", "7");
+
+    // --- Display Cards Before Changing Visibility ---
+    let output = document.getElementById("output");
+    output.innerHTML += "<h3>Before show/hide:</h3>";
+    output.innerHTML += `<p>Card 1 → Suit: ${card1.suit}, Rank: ${card1.rank}, isVisible: ${card1.isVisible}</p>`;
+    output.innerHTML += `<p>Card 2 → Suit: ${card2.suit}, Rank: ${card2.rank}, isVisible: ${card2.isVisible}</p>`;
+
+    // --- Change Visibility ---
+    card1.show();  // Make card1 visible
+    card2.hide();  // Ensure card2 stays hidden
+
+    // --- Display Cards After Changing Visibility ---
+    output.innerHTML += "<h3>After show/hide:</h3>";
+    output.innerHTML += `<p>Card 1 → Suit: ${card1.suit}, Rank: ${card1.rank}, isVisible: ${card1.isVisible}</p>`;
+    output.innerHTML += `<p>Card 2 → Suit: ${card2.suit}, Rank: ${card2.rank}, isVisible: ${card2.isVisible}</p>`;
+  </script>
+</body>
+</html>
