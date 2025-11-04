@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Deck of Cards</title>
+</head>
+<body>
+  <h2>Simple Deck of Cards Example</h2>
+  <div id="output"></div>
+
+  <script>
+    // --- Simple Card Object ---
+    function Card(suit, rank) {
+      this.suit = suit;
+      this.rank = rank;
+      this.isVisible = false;
+      this.isDealt = false;
+
+      this.show = function() {
+        this.isVisible = true;
+      };
+
+      this.hide = function() {
+        this.isVisible = false;
+      };
+    }
+
+    // --- Make a Simple Deck ---
+    function makeDeck() {
+      // create all 52 cards (one by one)
+      let deck = [];
+
+      let suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
+      let ranks = ["Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"];
+
+      // build deck using two simple loops (easy to read)
+      for (let i = 0; i < suits.length; i++) {
+        for (let j = 0; j < ranks.length; j++) {
+          let card = new Card(suits[i], ranks[j]);
+          deck.push(card);
+        }
+      }
+      return deck;
+    }
+
+    // --- Deal Three Random Cards ---
+    function dealThree(deck) {
+      let hand = [];
+
+      while (hand.length < 3) {
+        // pick a random number between 0–51
+        let randomIndex = Math.floor(Math.random() * 52);
+        let card = deck[randomIndex];
+
+        if (!card.isDealt) {
+          card.isDealt = true;
+          card.show();
+          hand.push(card);
+        }
+      }
+
+      return hand;
+    }
+
+    // --- Run Program ---
+    let deck = makeDeck();
+    let hand = dealThree(deck);
+
+    let output = document.getElementById("output");
+    output.innerHTML += "<h3>Dealt 3 Random Cards:</h3>";
+
+    // show each card dealt
+    for (let i = 0; i < hand.length; i++) {
+      output.innerHTML += `<p>Card ${i + 1}: ${hand[i].rank} of ${hand[i].suit} (Visible: ${hand[i].isVisible})</p>`;
+    }
+
+    // check if one card is still in deck
+    let checkSuit = "Hearts";
+    let checkRank = "Ace";
+    let found = false;
+
+    for (let i = 0; i < deck.length; i++) {
+      if (deck[i].suit === checkSuit && deck[i].rank === checkRank && !deck[i].isDealt) {
+        found = true;
+        break;
+      }
+    }
+
+    output.innerHTML += "<h3>Check Card:</h3>";
+    output.innerHTML += `<p>${checkRank} of ${checkSuit}: ${found ? "Still in deck" : "Already dealt"}</p>`;
+  </script>
+</body>
+</html>
