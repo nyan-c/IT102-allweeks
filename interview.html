@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interviewee Information Page</title>
+</head>
+<body>
+  <div id="output"></div>
+
+  <script>
+    // --- Outer function controls everything ---
+    function interviewProcess() {
+
+      // --- Step 1: introduce interviewer ---
+      function introduction() {
+        document.getElementById("output").innerHTML = "Interviewee Information Page<br><br>";
+
+        // --- Step 2: nested function asks candidate name ---
+        function askName() {
+          let name = prompt("Please enter the interviewee's name:");
+
+          // --- Step 3: nested inside askName, ask email ---
+          function askEmail() {
+            let email = prompt("Please enter the interviewee's email address:");
+
+            // --- Step 4: nested inside askEmail, ask start date ---
+            function askStartDate() {
+              let date = prompt("Please enter the interviewee's available start date:");
+
+              // --- Display all collected info on the web page ---
+              document.getElementById("output").innerHTML +=
+                "Candidate name: " + name + "<br>" +
+                "Candidate email address: " + email + "<br>" +
+                "Candidate available start date: " + date + "<br>";
+            }
+
+            // call inner-inner function (askStartDate)
+            askStartDate();
+          }
+
+          // call inner function (askEmail)
+          askEmail();
+        }
+
+        // call first nested function (askName)
+        askName();
+      }
+
+      // call introduction
+      introduction();
+    }
+
+    // --- Start the whole process automatically when page loads ---
+    interviewProcess();
+  </script>
+</body>
+</html>
